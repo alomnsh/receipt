@@ -7,7 +7,6 @@ export const receipt = {
   seed: 67,
 };
 
-// everything here is editable. play around or rm -rf and see what you come up with!
 export function drawReceipt(p) {
   const { width: w, height: h } = p;
   const margin = 24;
@@ -19,7 +18,7 @@ export function drawReceipt(p) {
     p.textAlign(p.CENTER, p.TOP);
     p.textStyle(p.BOLD);
     p.textSize(28);
-    p.text("NIGHT SIGNALS", w / 2, 30);
+    p.text("The Eco Plane", w / 2, 30);
 
   dashedLine(p, margin, 94, w - margin, 94, 6, 5);
 
@@ -52,28 +51,6 @@ export function drawReceipt(p) {
     p.vertex(w - margin, 500 + layer * 48);
     p.endShape(p.CLOSE);
   }
-
-  // The transmission: a winding route with little station markers.
-  p.noFill();
-  p.stroke(0);
-  p.strokeWeight(5);
-  p.beginShape();
-  const route = [];
-  for (let y = 585; y < 915; y += 34) {
-    const x = p.map(p.noise(y * 0.018, 20), 0, 1, 68, w - 68);
-    route.push({ x, y });
-    p.vertex(x, y);
-  }
-  p.endShape();
-
-  p.strokeWeight(2);
-  p.fill(255);
-  route.forEach(({ x, y }, index) => {
-    if (index % 2 === 0) {
-      p.square(x - 6, y - 6, 12);
-      p.line(index % 4 === 0 ? margin : w - margin, y, x, y);
-    }
-  });
 
   dashedLine(p, margin, 930, w - margin, 930, 6, 5);
 
