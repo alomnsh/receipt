@@ -23,34 +23,55 @@ export function drawReceipt(p) {
   dashedLine(p, margin, 94, w - margin, 94, 6, 5);
 
   // A seeded field of tiny stars and radio noise.
-  for (let i = 0; i < 150; i += 1) {
-    const x = p.random(margin, w - margin);
-    const y = p.random(118, 350);
-    const size = p.random([1, 1, 1, 2, 2, 3]);
-    if (p.random() > 0.82) {
-      p.rect(x - 3, y, 7, 1);
-      p.rect(x, y - 3, 1, 7);
-    } else {
-      p.rect(x, y, size, size);
-    }
-  }
+  //for (let i = 0; i < 150; i += 1) {
+    //const x = p.random(margin, w - margin);
+    //const y = p.random(118, 350);
+    //const size = p.random([1, 1, 1, 2, 2, 3]);
+    //if (p.random() > 0.82) {
+      //p.rect(x - 3, y, 7, 1);
+      //p.rect(x, y - 3, 1, 7);
+    //} else {
+      //p.rect(x, y, size, size);
+    //}
+  //}
 
-  // Layered mountain signals. p.noise() and p.random() are both seeded.
-  const ridgeTop = 300;
-  for (let layer = 0; layer < 5; layer += 1) {
-    p.fill(layer % 2 === 0 ? 0 : 255);
-    p.stroke(0);
-    p.strokeWeight(2);
-    p.beginShape();
-    p.vertex(margin, 500 + layer * 48);
-    for (let x = margin; x <= w - margin; x += 5) {
-      const wave = p.noise(x * 0.012, layer * 4.2) * 90;
-      const y = ridgeTop + layer * 50 - wave;
-      p.vertex(x, y);
-    }
-    p.vertex(w - margin, 500 + layer * 48);
-    p.endShape(p.CLOSE);
-  }
+  // My reference
+
+  //const ridgeTop = 300;
+  //for (let layer = 0; layer < 5; layer += 1) {
+    //p.fill(layer % 2 === 0 ? 0 : 255);
+    //p.stroke(0);
+    //p.strokeWeight(2);
+    //p.beginShape();
+    //p.vertex(margin, 500 + layer * 48);
+    //for (let x = margin; x <= w - margin; x += 5) {
+      //const wave = p.noise(x * 0.012, layer * 4.2) * 90;
+      //const y = ridgeTop + layer * 50 - wave;
+      //p.vertex(x, y);
+    //}
+    //p.vertex(w - margin, 500 + layer * 48);
+    //p.endShape(p.CLOSE);
+  //}
+
+  const centerX = w /2; // I wanted the mid point
+  const planeY = 220;
+
+  p.stroke(0);
+  p.strokeWeight(3);
+  p.strokeJoin(p.ROUND);
+
+  // Plane body
+  p.strokeWeight(2);
+  p.line(centerX, planeY, centerX, planeY + 115);
+
+  // Left wing
+  p.fill(225);
+  p.beginShape();
+  p.vertex(centerX, planeY);
+  p.vertex(centerX - 80, planeY + 100);
+  p.vertex(centerX, planeY + 75);
+  p.endShape(p.CLOSE);
+  
 
   dashedLine(p, margin, 930, w - margin, 930, 6, 5);
 
