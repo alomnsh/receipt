@@ -71,7 +71,23 @@ export function drawReceipt(p) {
   p.vertex(centerX - 80, planeY + 100);
   p.vertex(centerX, planeY + 75);
   p.endShape(p.CLOSE);
-  
+
+  // Right wing 
+  p.fill(230);
+  p.beginShape()
+  p.vertex(centerX, planeY)
+  p.vertex(centerX + 80, planeY + 100);
+  p.vertex(centerX, planeY + 75);
+  p.endShape(p.CLOSE);
+
+  // Bottom part
+  p.fill(180);
+  p.beginShape();
+  p.vertex(centerX - 30, planeY + 85);
+  p.vertex(centerX, planeY + 115);
+  p.vertex(centerX + 30, planeY + 85);
+  p.vertex(centerX, planeY + 75);
+  p.endShape(p.CLOSE);
 
   dashedLine(p, margin, 930, w - margin, 930, 6, 5);
 
