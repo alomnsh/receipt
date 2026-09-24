@@ -3,7 +3,7 @@
 import JsBarcode from "jsbarcode";
 
 export const receipt = {
-  height: 1080, // 240–2000 px. Width is fixed by the printer.
+  height: 600, // 240–2000 px. Width is fixed by the printer.
   seed: 67,
 };
 
@@ -62,37 +62,54 @@ export function drawReceipt(p) {
 
   // Plane body
   p.strokeWeight(2);
-  p.line(centerX, planeY, centerX, planeY + 115);
+  p.line(centerX, planeY, centerX, planeY + 155);
+
+  // Engine
+  p.fill(200);
+  p.rect(centerX - 48, planeY + 72, 10, 18, 3);
+  p.rect(centerX + 38, planeY + 72, 10, 18, 3);
+
+  p.strokeWeight(3);
 
   // Left wing
-  p.fill(225);
+  p.fill(245);
   p.beginShape();
   p.vertex(centerX, planeY);
-  p.vertex(centerX - 80, planeY + 100);
-  p.vertex(centerX, planeY + 75);
+  p.vertex(centerX - 12, planeY + 60);
+  p.vertex(centerX - 110, planeY + 110);
+  p.vertex(centerX - 108, planeY + 118);
+  p.vertex(centerX - 12, planeY + 95)
   p.endShape(p.CLOSE);
 
   // Right wing 
-  p.fill(230);
+  p.fill(255);
   p.beginShape()
   p.vertex(centerX, planeY)
-  p.vertex(centerX + 80, planeY + 100);
-  p.vertex(centerX, planeY + 75);
+  p.vertex(centerX + 12, planeY + 60);
+  p.vertex(centerX + 110, planeY + 110);
+  p.vertex(centerX + 108, planeY + 118);
+  p.vertex(centerX + 12, planeY + 95)
   p.endShape(p.CLOSE);
 
-  // Bottom part
-  p.fill(180);
+  p.line(centerX - 12, planeY + 95, centerX, planeY + 155);
+  p.line(centerX + 12, planeY + 95, centerX, planeY + 155);
+
+  // Tail
+  p.fill(240);
   p.beginShape();
-  p.vertex(centerX - 30, planeY + 85);
-  p.vertex(centerX, planeY + 115);
-  p.vertex(centerX + 30, planeY + 85);
-  p.vertex(centerX, planeY + 75);
+  p.vertex(centerX, planeY + 155);
+  p.vertex(centerX - 42, planeY + 172);
+  p.vertex(centerX - 40, planeY + 178);
+  p.vertex(centerX, planeY + 180);
+  p.vertex(centerX + 40, planeY + 178);
+  p.vertex(centerX + 42, planeY + 172);
+  p.vertex(centerX, planeY + 155);
   p.endShape(p.CLOSE);
 
-  dashedLine(p, margin, 930, w - margin, 930, 6, 5);
+  dashedLine(p, margin, 450, w - margin, 450, 6, 5);
 
   const barcodeValue = "receipt.hackclub.com";
-  drawBarcode(p, barcodeValue, w / 2, 960);
+  drawBarcode(p, barcodeValue, w / 2, 480);
 
   p.noStroke();
   p.fill(0);
@@ -100,7 +117,7 @@ export function drawReceipt(p) {
   p.textAlign(p.CENTER, p.TOP);
   p.textStyle(p.NORMAL);
   p.textSize(10);
-  p.text(barcodeValue, w / 2, 1024);
+  p.text(barcodeValue, w / 2, 550);
 }
 
 function drawBarcode(p, value, centerX, y) {
